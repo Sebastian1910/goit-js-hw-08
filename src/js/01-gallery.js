@@ -1,5 +1,5 @@
 import 'simplelightbox/dist/simple-lightbox.min.css';
-import SimpleLightbox from 'simplelightbox';
+import SimpleLightbox from 'simplelightbox/dist/simple-lightbox.esm.js';
 import { galleryItems } from './gallery-items.js';
 
 const gallery = document.querySelector('.gallery');
@@ -31,4 +31,4 @@ document.addEventListener('DOMContentLoaded', function () {
   addGalleryItems();
 });
 
-const lightbox = new SimpleLightbox('.gallery li');
+const lightbox = new SimpleLightbox('.gallery a');
