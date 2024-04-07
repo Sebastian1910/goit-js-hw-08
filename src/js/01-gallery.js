@@ -29,16 +29,25 @@ function addGalleryItems() {
 // Dodanie elementów galerii po załadowaniu zawartości DOM
 document.addEventListener('DOMContentLoaded', function () {
   addGalleryItems();
-
-  // Utworzenie instancji SimpleLightbox po dodaniu elementów galerii
-  const lightbox = new SimpleLightbox('.gallery a');
-
-  // Otwarcie galerii po kliknięciu na obrazek
-  gallery.addEventListener('click', function (event) {
-    event.preventDefault();
-
-    if (event.target.nodeName === 'IMG') {
-      lightbox.open();
-    }
-  });
 });
+
+// Obsługa kliknięcia na obrazek
+gallery.addEventListener('click', function (event) {
+  event.preventDefault();
+
+  if (event.target.nodeName === 'IMG') {
+    const src = event.target.dataset.source;
+    const alt = event.target.getAttribute('alt');
+
+    const instance = basicLightbox.create(`
+      <img src="${src}">
+    `);
+
+    instance.show();
+
+    console.log('Image source:', src);
+    console.log('Image alt:', alt);
+  }
+});
+
+console.log(galleryItems);
