@@ -1,6 +1,6 @@
-import 'simplelightbox/dist/simple-lightbox.min.css';
-import SimpleLightbox from 'simplelightbox/dist/simple-lightbox.esm.js';
+import SimpleLightbox from 'simplelightbox';
 import { galleryItems } from './gallery-items.js';
+import 'simplelightbox/dist/simple-lightbox.min.css';
 
 const gallery = document.querySelector('.gallery');
 
@@ -29,6 +29,16 @@ function addGalleryItems() {
 // Dodanie elementów galerii po załadowaniu zawartości DOM
 document.addEventListener('DOMContentLoaded', function () {
   addGalleryItems();
-});
 
-const lightbox = new SimpleLightbox('.gallery a');
+  // Utworzenie instancji SimpleLightbox po dodaniu elementów galerii
+  const lightbox = new SimpleLightbox('.gallery a');
+
+  // Otwarcie galerii po kliknięciu na obrazek
+  gallery.addEventListener('click', function (event) {
+    event.preventDefault();
+
+    if (event.target.nodeName === 'IMG') {
+      lightbox.open();
+    }
+  });
+});
