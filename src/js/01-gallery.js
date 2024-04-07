@@ -32,5 +32,3 @@ function addGalleryItems() {
 document.addEventListener('DOMContentLoaded', function () {
   addGalleryItems();
 });
-
-console.log(galleryItems);
