@@ -4,8 +4,9 @@ import 'simplelightbox/dist/simple-lightbox.min.css';
 
 const gallery = document.querySelector('.gallery');
 
-// Funkcja do dodawania elementów galerii
-function addGalleryItems() {
+document.addEventListener('DOMContentLoaded', function () {
+  const gallery = document.querySelector('.gallery');
+
   galleryItems.forEach(item => {
     const li = document.createElement('li');
     li.classList.add('gallery__item');
@@ -19,35 +20,21 @@ function addGalleryItems() {
     img.setAttribute('src', item.preview);
     img.setAttribute('alt', item.description);
     img.setAttribute('data-source', item.original);
+    img.setAttribute('title', item.description); // Dodanie opisu jako tytułu obrazka
 
     a.appendChild(img);
     li.appendChild(a);
     gallery.appendChild(li);
   });
-}
 
-// Dodanie elementów galerii po załadowaniu zawartości DOM
-document.addEventListener('DOMContentLoaded', function () {
-  addGalleryItems();
+  gallery.addEventListener('click', function (event) {
+    event.preventDefault();
+  });
+
+  const lightbox = new SimpleLightbox('.gallery a', {
+    captions: true, // Włączenie wyświetlania podpisów
+    captionDelay: 250, // Ustawienie opóźnienia w wyświetlaniu podpisu
+  });
+
+  console.log(galleryItems);
 });
-
-// Obsługa kliknięcia na obrazek
-gallery.addEventListener('click', function (event) {
-  event.preventDefault();
-
-  if (event.target.nodeName === 'IMG') {
-    const src = event.target.dataset.source;
-    const alt = event.target.getAttribute('alt');
-
-    const instance = basicLightbox.create(`
-      <img src="${src}">
-    `);
-
-    instance.show();
-
-    console.log('Image source:', src);
-    console.log('Image alt:', alt);
-  }
-});
-
-console.log(galleryItems);
